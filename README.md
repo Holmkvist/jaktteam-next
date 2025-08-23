@@ -37,7 +37,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Prisma
 
-Go to https://pris.ly/ppg-init for detailed instructions.
+Go to https://pris.ly/ppg-init for detailed instructions. Other guides:
+- https://www.prisma.io/docs/guides/nextjs
 
 1. Define your database schema
    Open the schema.prisma file and define your first models. Check the docs if you need inspiration: https://pris.ly/ppg-init.
