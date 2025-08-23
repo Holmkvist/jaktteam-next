@@ -34,3 +34,33 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Prisma
+
+Go to https://pris.ly/ppg-init for detailed instructions.
+
+1. Define your database schema
+   Open the schema.prisma file and define your first models. Check the docs if you need inspiration: https://pris.ly/ppg-init.
+
+2. Apply migrations
+   Run the following command to create and apply a migration:
+```bash
+   npx prisma migrate dev --name init
+```
+
+3. Manage your data
+   View and edit your data locally by running this command:
+```bash
+   npx prisma studio
+```
+
+...or online in Console:
+https://console.prisma.io/cmeo532wz01tc2dgzgowkye53/cmeoinbob02uv18gv426rhj4y/cmeoinbob02uw18gvn3boqmyh/studio
+
+4. Send queries from your app
+   To access your database from a JavaScript/TypeScript app, you need to use Prisma ORM. Go here for step-by-step instructions: https://pris.ly/ppg-init
+
+## Prettier
+
+This project uses [Prettier](https://prettier.io/) to format the code. Configuration:
+- https://github.com/aridanpantoja/eslint-prettier-nextjs
