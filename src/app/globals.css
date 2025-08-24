@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+    --color-gold-50: #fbf9eb;
+    --color-gold-100: #f5f2cc;
+    --color-gold-200: #ede39b;
+    --color-gold-300: #e3ce61;
+    --color-gold-400: #d9b736;
+    --color-gold-500: #cba329;
+    --color-gold-600: #ad8021;
+    --color-gold-700: #8b5e1d;
+    --color-gold-800: #744c1f;
+    --color-gold-900: #634020;
+    --color-gold-950: #39210f;
+    --color-gray-50: #f5f6f6;
+    --color-gray-100: #e6e7e7;
+    --color-gray-200: #cfd2d2;
+    --color-gray-300: #adb2b3;
+    --color-gray-400: #848b8c;
+    --color-gray-500: #697071;
+    --color-gray-600: #5a5f60;
+    --color-gray-700: #4c5052;
+    --color-gray-800: #434647;
+    --color-gray-900: #393b3c;
+    --color-gray-950: #252727;
+    --color-blue-50: #f0f9ff;
+    --color-blue-100: #e0f3fe;
+    --color-blue-200: #b9e8fe;
+    --color-blue-300: #7cd6fd;
+    --color-blue-400: #36c2fa;
+    --color-blue-500: #0cabeb;
+    --color-blue-600: #0092d6; /* default */
+    --color-blue-700: #016da3;
+    --color-blue-800: #065c86;
+    --color-blue-900: #0b4c6f;
+    --color-blue-950: #07304a;
+    --color-green-50: #f1ffe5;
+    --color-green-100: #ddffc7;
+    --color-green-200: #bdff95;
+    --color-green-300: #92fe58;
+    --color-green-400: #6df526;
+    --color-green-500: #4bdc06;
+    --color-green-600: #37b400; /* default */
+    --color-green-700: #2a8506;
+    --color-green-800: #26690b;
+    --color-green-900: #21580f;
+    --color-green-950: #0c3201;
+    --color-red-50: #fff1f0;
+    --color-red-100: #ffe0dd;
+    --color-red-200: #ffc6c0;
+    --color-red-300: #ff9e94;
+    --color-red-400: #ff6757;
+    --color-red-500: #ff3823;
+    --color-red-600: #f31700; /* default */
+    --color-red-700: #d71400;
+    --color-red-800: #b11303;
+    --color-red-900: #92170a;
+    --color-red-950: #500800;
+    --color-yellow-50: #fffee7;
+    --color-yellow-100: #ffffc1;
+    --color-yellow-200: #fffa86;
+    --color-yellow-300: #ffef41;
+    --color-yellow-400: #ffdf0d;
+    --color-yellow-500: #ffd000; /* default */
+    --color-yellow-600: #d19800;
+    --color-yellow-700: #a66d02;
+    --color-yellow-800: #89540a;
+    --color-yellow-900: #74450f;
+    --color-yellow-950: #442404;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.bg-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
 }
