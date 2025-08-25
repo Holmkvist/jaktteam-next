@@ -18,7 +18,6 @@ import {
   ChartPieIcon,
   Cog6ToothIcon,
   DocumentDuplicateIcon,
-  FolderIcon,
   HomeIcon,
   UsersIcon,
   XMarkIcon,
@@ -29,14 +28,46 @@ import {
 } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import { SessionData } from '@auth0/nextjs-auth0/types';
+import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+const navigationList = (pathName: string) => [
+  {
+    name: 'Översikt',
+    href: '/dashboard',
+    icon: HomeIcon,
+    current: pathName === '/dashboard',
+  },
+  {
+    name: 'Jaktlaget',
+    href: '/team',
+    icon: UsersIcon,
+    current: pathName === '/team',
+  },
+  {
+    name: 'Kalender',
+    href: '/calendar',
+    icon: CalendarIcon,
+    current: pathName === '/calendar',
+  },
+  {
+    name: 'Jaktkort',
+    href: '/cards',
+    icon: DocumentDuplicateIcon,
+    current: pathName === '/cards',
+  },
+  {
+    name: 'Karta',
+    href: '/map',
+    icon: DocumentDuplicateIcon,
+    current: pathName === '/map',
+  },
+  {
+    name: 'Rapporter',
+    href: '',
+    icon: ChartPieIcon,
+    current: pathName === '/reports',
+  },
 ];
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
@@ -55,6 +86,8 @@ type Props = {
 
 export default function SidebarLayout({ children, session }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const pathName = usePathname();
+  const navigation = navigationList(pathName);
 
   const user = session.user;
 
@@ -185,7 +218,7 @@ export default function SidebarLayout({ children, session }: Props) {
                           aria-hidden="true"
                           className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-white"
                         />
-                        Settings
+                        Inställningar
                       </a>
                     </li>
                   </ul>
@@ -199,19 +232,16 @@ export default function SidebarLayout({ children, session }: Props) {
         <div className="hidden bg-gray-900 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4 dark:border-white/10 dark:bg-black/10">
-            <div className="flex h-16 shrink-0 items-center">
-              <img
-                alt="Your Company"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto dark:hidden"
-              />
-              <img
-                alt="Your Company"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                className="h-8 w-auto not-dark:hidden"
+            <div className="flex h-24 shrink-0 items-center">
+              <Image
+                alt="JaktTeam AB logo"
+                src={'/images/base_textlogo_transparent_background.png'}
+                width={96}
+                height={124}
+                className={'h-24 w-auto'}
               />
             </div>
-            <nav className="flex flex-1 flex-col">
+            <nav className="-mt-4 flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">

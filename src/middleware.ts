@@ -45,26 +45,15 @@ export async function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
 
   if (pathname.startsWith('/auth')) return res;
-  // 1) Skippa Auth0 och statiska/public tillgångar tidigt
-  // if (
-  //   pathname.startsWith('/auth') ||
-  //   pathname.startsWith('/images') || // <- viktigt för public/images/*
-  //   pathname.startsWith('/_next/') ||
-  //   pathname === '/favicon.ico' ||
-  //   pathname === '/sitemap.xml' ||
-  //   pathname === '/robots.txt'
-  // ) {
-  //   return res;
-  // }
 
-  // 2) Publik startsida men redirecta inloggade
+  // 1) Publik startsida men redirecta inloggade
   if (pathname === '/') {
     const session = await auth0.getSession(req);
     if (session) return NextResponse.redirect(new URL('/dashboard', req.url));
     return res; // oinloggad får se /
   }
 
-  // 3) Skydda allt annat
+  // 2) Skydda allt annat
   const session = await auth0.getSession(req);
   if (!session) {
     const loginUrl = new URL('/auth/login', req.url);
@@ -77,7 +66,6 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skydda allt utom listan ovan
     '/((?!images|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
   ],
 };
