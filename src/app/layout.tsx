@@ -5,6 +5,8 @@ import { ReactNode } from 'react';
 import SidebarLayout from '@/app/components/layouts/SidebarLayout';
 import { auth0 } from '@/lib/auth0';
 import prisma from '@/lib/prisma';
+import CommandPaletteTheme from '@/app/components/CommandPaletteTheme';
+import Providers from '@/app/Providers';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -60,16 +62,26 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" className={'h-full bg-gray-100 dark:bg-gray-900'}>
+    <html
+      lang="en"
+      className={'h-full bg-gray-100 dark:bg-gray-900'}
+      suppressHydrationWarning
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
-        {session ? (
-          <SidebarLayout session={session}>{children}</SidebarLayout>
-        ) : (
-          children
-        )}
-        {/*<StackedLayout>{children}</StackedLayout>*/}
+        <Providers>
+          {session ? (
+            <SidebarLayout session={session}>
+              <>
+                <CommandPaletteTheme />
+                {children}
+              </>
+            </SidebarLayout>
+          ) : (
+            children
+          )}
+        </Providers>
       </body>
     </html>
   );

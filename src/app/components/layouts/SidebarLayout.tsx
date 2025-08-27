@@ -63,7 +63,7 @@ const navigationList = (pathName: string) => [
     current: pathName === '/map',
   },
   {
-    name: 'Rapporter',
+    name: 'Rapportering',
     href: '',
     icon: ChartPieIcon,
     current: pathName === '/reports',
@@ -232,13 +232,12 @@ export default function SidebarLayout({ children, session }: Props) {
         <div className="hidden bg-gray-900 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4 dark:border-white/10 dark:bg-black/10">
-            <div className="flex h-24 shrink-0 items-center">
+            <div className="relative flex h-24 w-40 shrink-0 items-center">
               <Image
                 alt="JaktTeam AB logo"
                 src={'/images/base_textlogo_transparent_background.png'}
-                width={96}
-                height={124}
-                className={'h-24 w-auto'}
+                layout={'fill'}
+                objectFit={'cover'}
               />
             </div>
             <nav className="-mt-4 flex flex-1 flex-col">
@@ -273,7 +272,7 @@ export default function SidebarLayout({ children, session }: Props) {
                 </li>
                 <li>
                   <div className="text-xs/6 font-semibold text-gray-400">
-                    Your teams
+                    Jaktlag
                   </div>
                   <ul role="list" className="-mx-2 mt-2 space-y-1">
                     {teams.map((team) => (
@@ -312,7 +311,7 @@ export default function SidebarLayout({ children, session }: Props) {
                       aria-hidden="true"
                       className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-white"
                     />
-                    Settings
+                    Insställningar
                   </a>
                 </li>
               </ul>
