@@ -9,7 +9,7 @@ const navigation = [
   { name: 'Kom igång', href: '/auth/signup' },
   { name: 'Priser', href: '/prices' },
   { name: 'Kontakta oss', href: '/contact' },
-  { name: 'Om företaget', href: '/about' },
+  { name: 'Om oss', href: '/about' },
 ];
 
 export default function HeroSection() {
@@ -136,11 +136,13 @@ export default function HeroSection() {
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
           <div className="text-center">
             <h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-white">
-              Enklare än så blir det inte med JaktTeam
+              Allt ditt jaktlag behöver – på ett ställe
             </h1>
             <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-              lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat.
+              JaktTeam gör det enkelt att organisera jaktlaget. Hantera
+              jaktkort, skapa jakter, rapportera vilt och håll ordning på
+              dokument, kartor och kommunikation – allt samlat i en modern
+              plattform byggd för jägare.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
@@ -150,10 +152,10 @@ export default function HeroSection() {
                 Kom igång
               </a>
               <a
-                href="#"
+                href="/about"
                 className="text-sm/6 font-semibold text-gray-900 dark:text-white"
               >
-                Läs mer <span aria-hidden="true">→</span>
+                Läs mer om JaktTeam <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
