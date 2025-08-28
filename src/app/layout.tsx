@@ -7,7 +7,6 @@ import { auth0 } from '@/lib/auth0';
 import prisma from '@/lib/prisma';
 import CommandPaletteTheme from '@/app/components/CommandPaletteTheme';
 import Providers from '@/app/Providers';
-import { redirect } from 'next/navigation';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -34,24 +33,26 @@ export default async function RootLayout({
 }>) {
   const session = await auth0.getSession();
 
-  if (!session || !session.user || !session.user.sub) redirect('/auth/login');
+  // if (!session || !session.user || !session.user.sub) redirect('/auth/login');
 
-  const user = await prisma.user.findUnique({
-    where: {
-      auth0UserId: session.user.sub,
-    },
-  });
-
-  if (!user) {
-    await prisma.user.create({
-      data: {
-        name: session.user.name,
+  if (session?.user.sub) {
+    const user = await prisma.user.findUnique({
+      where: {
         auth0UserId: session.user.sub,
-        email: session.user.email || '',
-        createdAt: new Date(),
-        firstLoginAt: new Date(),
       },
     });
+
+    if (!user) {
+      await prisma.user.create({
+        data: {
+          name: session.user.name,
+          auth0UserId: session.user.sub,
+          email: session.user.email || '',
+          createdAt: new Date(),
+          firstLoginAt: new Date(),
+        },
+      });
+    }
   }
 
   return (

@@ -21,13 +21,14 @@ export async function middleware(req: NextRequest) {
 
   const { pathname, search } = req.nextUrl;
 
+  console.log({ pathname });
   if (pathname.startsWith('/auth')) return res;
 
   // 1) Publik startsida men redirecta inloggade
   if (pathname === '/') {
     const session = await auth0.getSession(req);
     if (session) return NextResponse.redirect(new URL('/dashboard', req.url));
-    return res; // oinloggad får se /
+    return res;
   }
 
   // 2) Skydda allt annat

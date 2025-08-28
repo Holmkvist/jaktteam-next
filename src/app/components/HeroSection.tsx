@@ -136,9 +136,9 @@ export default function HeroSection() {
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
           <div className="text-center">
             <h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-white">
-              Allt ditt jaktlag behöver – på ett ställe
+              Allt för din jakt med JaktTeam
             </h1>
-            <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">
+            <p className="mt-8 text-lg font-medium text-pretty text-gray-200 sm:text-xl/8 dark:text-gray-200">
               JaktTeam gör det enkelt att organisera jaktlaget. Hantera
               jaktkort, skapa jakter, rapportera vilt och håll ordning på
               dokument, kartor och kommunikation – allt samlat i en modern
