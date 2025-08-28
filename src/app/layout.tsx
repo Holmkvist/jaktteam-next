@@ -1,13 +1,13 @@
-import type {Metadata} from 'next';
-import {Geist, Geist_Mono} from 'next/font/google';
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 import SidebarLayout from '@/app/components/layouts/SidebarLayout';
-import {auth0} from '@/lib/auth0';
+import { auth0 } from '@/lib/auth0';
 import prisma from '@/lib/prisma';
 import CommandPaletteTheme from '@/app/components/CommandPaletteTheme';
 import Providers from '@/app/Providers';
-import {redirect} from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
