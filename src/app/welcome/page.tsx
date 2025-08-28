@@ -24,11 +24,11 @@ export default async function WelcomePage() {
   }
 
   return (
-    <main className="bg-background relative min-h-screen w-full">
+    <main className="bg-background relative min-h-full w-full">
       {/* Bakgrundsbild (från public/images/2.jpg) */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/images/2.jpg"
+          src="/images/3.jpg"
           alt="Skog i gryning"
           fill
           priority
@@ -63,7 +63,7 @@ export default async function WelcomePage() {
                 <li>Välj roller (Admin, Moderator, Användare)</li>
                 <li>Bjud in med e-post (engångslänk med giltighetstid)</li>
               </ul>
-              <form action="/api/teams/new" method="GET" className="mt-5">
+              <form action="/teams/new" method="GET" className="mt-5">
                 {/* GET leder till en sida/flow för att skapa lag (se punkt 2) */}
                 <button className="w-full rounded-xl bg-green-700 px-4 py-3 font-semibold text-white shadow hover:bg-green-800">
                   Skapa jaktlag

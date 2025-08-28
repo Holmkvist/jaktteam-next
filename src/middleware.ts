@@ -1,47 +1,24 @@
-// import { NextRequest, NextResponse } from 'next/server';
-// import { auth0 } from './lib/auth0';
-//
-// export async function middleware(request: NextRequest) {
-//   const res = await auth0.middleware(request);
-//   console.log('inside middleware', request.nextUrl.pathname);
-//   const { pathname, search } = request.nextUrl;
-//
-//   // 2) Skippa Auth0:s egna endpoints
-//   if (pathname.startsWith('/auth') || pathname === '/') return res;
-//
-//   // 3) Kolla sessionen (viktigt: skicka in request-objektet i v4)
-//   const session = await auth0.getSession(request);
-//
-//   // 4) Redirecta oinloggade till /auth/login med returnTo
-//   if (!session) {
-//     const loginUrl = new URL('/auth/login', request.url);
-//     loginUrl.searchParams.set('returnTo', pathname + search);
-//     return NextResponse.redirect(loginUrl);
-//   }
-//
-//   // 5) Tillåt requesten
-//   return res;
-// }
-//
-// export const config = {
-//   matcher: [
-//     /*
-//      * Match all request paths except for the ones starting with:
-//      * - _next/static (static files)
-//      * - _next/image (image optimization files)
-//      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
-//      */
-//     '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
-//   ],
-// };
-
-// src/middleware.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { auth0 } from './lib/auth0';
+
+function readClaimFromIdToken(idToken: string, key: string) {
+  try {
+    const payloadB64 = idToken
+      .split('.')[1]
+      .replace(/-/g, '+')
+      .replace(/_/g, '/');
+    const json = atob(payloadB64);
+    const payload = JSON.parse(json);
+    return payload[key];
+  } catch {
+    return undefined;
+  }
+}
 
 export async function middleware(req: NextRequest) {
   // Låt SDK:t hantera /auth/* och cookies
   const res = await auth0.middleware(req);
+
   const { pathname, search } = req.nextUrl;
 
   if (pathname.startsWith('/auth')) return res;
@@ -59,6 +36,24 @@ export async function middleware(req: NextRequest) {
     const loginUrl = new URL('/auth/login', req.url);
     loginUrl.searchParams.set('returnTo', pathname + search);
     return NextResponse.redirect(loginUrl);
+  }
+
+  // om onboarding → tvinga till /welcome
+  const idToken = session.tokenSet?.idToken as string | undefined;
+  const onboardingClaim =
+    idToken && readClaimFromIdToken(idToken, 'https://your.app/onboarding');
+
+  const needsOnboarding =
+    req.cookies.get('onboarding')?.value === '1' || onboardingClaim === true;
+
+  console.log('needsOnboarding', { needsOnboarding, onboardingClaim });
+  if (
+    needsOnboarding &&
+    !pathname.startsWith('/welcome') &&
+    !pathname.startsWith('/invite')
+  ) {
+    res.cookies.set('onboarding', '0', { secure: true });
+    return NextResponse.redirect(new URL('/welcome', req.url));
   }
 
   return res;
