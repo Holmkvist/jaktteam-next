@@ -22,10 +22,7 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import {
-  ChevronDownIcon,
-  MagnifyingGlassIcon,
-} from '@heroicons/react/20/solid';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import { SessionData } from '@auth0/nextjs-auth0/types';
 import { usePathname } from 'next/navigation';
@@ -69,14 +66,20 @@ const navigationList = (pathName: string) => [
     current: pathName === '/reports',
   },
 ];
-const teams = [
-  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+const teams: {
+  id: string;
+  name: string;
+  href: string;
+  initial: string;
+  current: boolean;
+}[] = [
+  { id: '1', name: 'Heroicons', href: '#', initial: 'H', current: false },
+  { id: '2', name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
+  { id: '3', name: 'Workcation', href: '#', initial: 'W', current: false },
 ];
 const userNavigation = [
-  { name: 'Min profil', href: 'user/profile' },
-  { name: 'Logga ut', href: '/auth/logout' },
+  { name: 'Kontoinställningar', href: '/account' },
+  { name: 'Support', href: '/account/support' },
 ];
 
 type Props = {
@@ -336,19 +339,20 @@ export default function SidebarLayout({ children, session }: Props) {
               className="h-6 w-px bg-gray-200 lg:hidden dark:bg-white/10"
             />
 
-            <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-              <form action="#" method="GET" className="grid flex-1 grid-cols-1">
-                <input
-                  name="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  className="col-start-1 row-start-1 block size-full bg-white pl-8 text-base text-gray-900 outline-hidden placeholder:text-gray-400 sm:text-sm/6 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500"
-                />
-                <MagnifyingGlassIcon
-                  aria-hidden="true"
-                  className="pointer-events-none col-start-1 row-start-1 size-5 self-center text-gray-400"
-                />
-              </form>
+            <div className="flex flex-1 justify-end gap-x-4 self-stretch lg:gap-x-6">
+              <div></div>
+              {/*<form action="#" method="GET" className="grid flex-1 grid-cols-1">*/}
+              {/*  <input*/}
+              {/*    name="search"*/}
+              {/*    placeholder="Search"*/}
+              {/*    aria-label="Search"*/}
+              {/*    className="col-start-1 row-start-1 block size-full bg-white pl-8 text-base text-gray-900 outline-hidden placeholder:text-gray-400 sm:text-sm/6 dark:bg-gray-900 dark:text-white dark:placeholder:text-gray-500"*/}
+              {/*  />*/}
+              {/*  <MagnifyingGlassIcon*/}
+              {/*    aria-hidden="true"*/}
+              {/*    className="pointer-events-none col-start-1 row-start-1 size-5 self-center text-gray-400"*/}
+              {/*  />*/}
+              {/*</form>*/}
               <div className="flex items-center gap-x-4 lg:gap-x-6">
                 <button
                   type="button"
@@ -389,18 +393,38 @@ export default function SidebarLayout({ children, session }: Props) {
                   </MenuButton>
                   <MenuItems
                     transition
-                    className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg outline-1 outline-gray-900/5 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in dark:bg-gray-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10"
+                    className="absolute right-0 z-10 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg outline-1 outline-black/5 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in dark:divide-white/10 dark:bg-gray-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10"
                   >
-                    {userNavigation.map((item) => (
-                      <MenuItem key={item.name}>
+                    <div className="px-4 py-3">
+                      <p className="text-sm text-gray-700 dark:text-gray-400">
+                        Inloggad som
+                      </p>
+                      <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
+                        {user.email}
+                      </p>
+                    </div>
+                    <div className="py-1">
+                      {userNavigation.map(({ name, href }) => (
+                        <MenuItem>
+                          <a
+                            href={href}
+                            className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden dark:text-gray-300 dark:data-focus:bg-white/5 dark:data-focus:text-white"
+                          >
+                            {name}
+                          </a>
+                        </MenuItem>
+                      ))}
+                    </div>
+                    <div className="py-1">
+                      <MenuItem>
                         <a
-                          href={item.href}
-                          className="block px-3 py-1 text-sm/6 text-gray-900 data-focus:bg-gray-50 data-focus:outline-hidden dark:text-white dark:data-focus:bg-white/5"
+                          href="/auth/logout"
+                          className="block w-full px-4 py-2 text-left text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden dark:text-gray-300 dark:data-focus:bg-white/5 dark:data-focus:text-white"
                         >
-                          {item.name}
+                          Logga ut
                         </a>
                       </MenuItem>
-                    ))}
+                    </div>
                   </MenuItems>
                 </Menu>
               </div>

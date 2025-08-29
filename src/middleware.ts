@@ -21,7 +21,6 @@ export async function middleware(req: NextRequest) {
 
   const { pathname, search } = req.nextUrl;
 
-  console.log({ pathname });
   if (pathname.startsWith('/auth')) return res;
 
   // 1) Publik startsida men redirecta inloggade

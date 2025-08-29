@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ReactNode } from 'react';
-import SidebarLayout from '@/app/components/layouts/SidebarLayout';
+import SidebarLayout from '@/components/layouts/SidebarLayout';
 import { auth0 } from '@/lib/auth0';
 import prisma from '@/lib/prisma';
-import CommandPaletteTheme from '@/app/components/CommandPaletteTheme';
+import CommandPaletteTheme from '@/components/CommandPaletteTheme';
 import Providers from '@/app/Providers';
 
 const geistSans = Geist({

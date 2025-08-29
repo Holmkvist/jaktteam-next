@@ -1,5 +1,5 @@
 import { auth0 } from '@/lib/auth0';
-import HeroSection from '@/app/components/HeroSection';
+import HeroSection from '@/components/HeroSection';
 
 export default async function Home() {
   // Fetch the user session
