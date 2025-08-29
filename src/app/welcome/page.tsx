@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import Image from 'next/image';
 import prisma from '@/lib/prisma';
 import { auth0 } from '@/lib/auth0';
+import { Button } from '@/components/Button';
 
 export default async function WelcomePage() {
   const session = await auth0.getSession();
@@ -64,10 +65,9 @@ export default async function WelcomePage() {
                 <li>Bjud in med e-post (engångslänk med giltighetstid)</li>
               </ul>
               <form action="/teams/new" method="GET" className="mt-5">
-                {/* GET leder till en sida/flow för att skapa lag (se punkt 2) */}
-                <button className="w-full rounded-xl bg-green-700 px-4 py-3 font-semibold text-white shadow hover:bg-green-800">
+                <Button variant={'secondary'} size={'md'} className={'w-full'}>
                   Skapa jaktlag
-                </button>
+                </Button>
               </form>
             </div>
 
