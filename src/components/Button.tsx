@@ -1,6 +1,7 @@
 import clsx from 'clsx';
+import { ButtonHTMLAttributes } from 'react';
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: 'primary' | 'secondary';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 };

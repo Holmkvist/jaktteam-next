@@ -314,7 +314,7 @@ export default function SidebarLayout({ children, session }: Props) {
                       aria-hidden="true"
                       className="size-6 shrink-0 text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-white"
                     />
-                    Insställningar
+                    Inställningar
                   </a>
                 </li>
               </ul>
@@ -431,9 +431,7 @@ export default function SidebarLayout({ children, session }: Props) {
             </div>
           </div>
 
-          <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8">{children}</div>
-          </main>
+          <main>{children}</main>
         </div>
       </div>
     </>

@@ -12,7 +12,7 @@ const navigation = [
   { name: 'Om oss', href: '/about' },
 ];
 
-export default function HeroSection() {
+export default function HeroView() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const coverImage = '/images/2.jpg';
